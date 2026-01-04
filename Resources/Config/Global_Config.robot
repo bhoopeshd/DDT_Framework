@@ -7,7 +7,7 @@ Documentation     Global Configuration
 
 *** Variables ***
 # =============================================================================
-# ENVIRONMENT CONFIGURATION (Not in Excel)
+# ENVIRONMENT CONFIGURATION
 # =============================================================================
 
 # Application URL
@@ -18,8 +18,6 @@ ${BROWSER}                  edge
 ${HEADLESS}                 ${FALSE}
 ${INCOGNITO}                ${FALSE}
 
-# Suppress browser noise logs (ERROR:chrome...)
-${BROWSER_LOG_LEVEL}        3
 
 # Timing Configuration
 ${WAIT_TIME}                10s

@@ -107,16 +107,6 @@ Write Result To Excel
 
 Write Data To Excel
     [Documentation]    Writes any data to Excel during test execution based on column name.
-    ...                Use this to save auto-generated values, timestamps, etc.
-    ...                
-    ...                Arguments:
-    ...                - ${TestID}: Test case ID to find the row
-    ...                - ${column_name}: Column name to write to
-    ...                - ${value}: Value to write
-    ...                
-    ...                Example:
-    ...                | ${username}= | Generate Random Username |
-    ...                | Write Data To Excel | TC_01 | Execution_Time | ${username} |
     [Arguments]    ${TestID}    ${column_name}    ${value}
     ${col_index}=    Get Column Index By Name    ${column_name}
     Log    Writing '${value}' for ${TestID} to column '${column_name}' (Index: ${col_index})    level=INFO

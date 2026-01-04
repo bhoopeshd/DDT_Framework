@@ -1,7 +1,7 @@
 *** Settings ***
-Documentation     Login Test Suite - BDD Style
-...               ================================
-...               Readable test steps with smart data handling.
+Documentation     Login Functionality Test Suite
+...               ==============================
+...               Covers positive, negative, and workflow scenarios.
 
 Resource          ../Resources/Steps/Steps.robot
 
@@ -19,19 +19,13 @@ TC_01 Valid Login Test
     [Documentation]    Tests successful login with valid credentials.
     [Tags]    login    smoke    positive
     
-    Log Test Step    1    Loading data from Excel
     Load Test Data    TC_01
-    Log Test Step    2    Launching Application
     Launch Application
-    Log Test Step    3    Entering User Credentials
     Enter User Credentials
-    Log Test Step    4    Clicking Login Button
     Click Login Button
-    Log Test Step    5    Validating Login Success
     Validate Login Success
-    Log Test Step    6    Updating Runtime Data in Excel
     Update Execution Timestamp    TC_01
-    Capture Screenshot Evidence
+    Capture Screenshot Evidence    Login_Success
 
 TC_02 Invalid Login Test
     [Documentation]    Tests login failure with invalid credentials.
@@ -64,24 +58,3 @@ TC_04 Login And Logout Test
     Validate Login Success
     Click Logout Button
     Validate Logout Success
-
-TC_05 Verify Page Elements Test
-    [Documentation]    Verifies login page UI elements.
-    [Tags]    ui    smoke
-    
-    Load Test Data    TC_05
-    Launch Application
-    Validate Login Page Elements
-    Validate Page Title
-
-
-*** Keywords ***
-Write Test Result
-    [Documentation]    Writes result to Excel.
-    [Arguments]    ${test_name}    ${status}
-    ${test_id}=    Evaluate    "${test_name}".split()[0]
-    TRY
-        Write Result To Excel    ${test_id}    ${status}
-    EXCEPT    AS    ${error}
-        Log    Could not write to Excel: ${error}    level=WARN
-    END

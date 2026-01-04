@@ -103,8 +103,18 @@ The framework exposes a rich API of keywords categorized by their engineering pu
 - `Fluent Wait For Element`: Polling-based visibility check.
 - `Fluent Click Element`: Clicks only when visible + enabled.
 - `Fluent Input Text`: Clears -> Waits -> Inputs.
+- `Fluent Select From List`: Handles standard `<select>` dropdowns.
+- `Fluent Select Custom`: Handles `<div>`/`<ul>` based dropdowns effectively.
 
-### 4.3 JavaScript Executor API (The "Magic" Layer)
+### 4.3 🎲 Data Utilities (Generation Layer)
+Robust tools for creating unique test data on the fly.
+- `Generate Random Number String`: Creates 10-digit unique IDs (configurable).
+- `Generate Random Name`: Creates realistic alphabetic names.
+- `Get Current Date Time String`: Returns `YYYYMMDD_HHMMSS`.
+- `Concat With Random Number`: Helper: `Input` -> `Input8473829102`.
+- `Concat With Timestamp`: Helper: `Report` -> `Report_20240101_120000`.
+
+### 4.4 JavaScript Executor API (The "Magic" Layer)
 Use these when standard Selenium interactions fail (e.g., hidden elements, overlays, React/Angular apps).
 - **Interaction**: `JS Click Element`, `JS Clear And Input`, `JS Input Text`.
 - **State**: `JS Get Text`, `JS Get Value`, `JS Is Element Visible`.
@@ -112,7 +122,7 @@ Use these when standard Selenium interactions fail (e.g., hidden elements, overl
 - **Debugging**: `JS Highlight Element` (draws red border), `JS Set Attribute`, `JS Remove Attribute`.
 - **Waits**: `JS Wait For Page Load` (document.readyState), `JS Wait For Ajax` (jQuery.active).
 
-### 4.4 📊 Dynamic Data Persistence & Strategy
+### 4.5 📊 Dynamic Data Persistence & Strategy
 The framework uses a **Dictionary-based** approach for data.
 
 #### Reading Data
@@ -120,6 +130,8 @@ Once `Load Test Data` is called, data is available in the `${TEST_DATA}` diction
 ```robot
 Log    Username is: ${TEST_DATA}[username]
 Input Text    ${LOGIN_INPUT}    ${TEST_DATA}[password]
+# Data Utils Usage
+${unique_user}=    Concat With Random Number    User
 ```
 
 #### Writing Data
@@ -155,8 +167,21 @@ robot --variable URL:https://staging.app.com Tests/
 robot --variable WAIT_TIME:25s --variable DELAY:1s Tests/
 ```
 
-### 5.3 Filtered Runs (Tagging)
-Useful for Smoke or Regression cycles:
+### 5.3 Filtered Runs (Precise Execution)
+You can run a single test case or a group of tests using tags.
+
+**Run a Specific Test Case by Name:**
+```powershell
+robot --test "TC_01 Valid Login Test" --outputdir Results Tests/
+```
+
+**Run using Wildcards (Glob Patterns):**
+```powershell
+# Runs all tests starting with TC_0
+robot --test "TC_0*" --outputdir Results Tests/
+```
+
+**Run by Tag (Smoke/Regression):**
 ```powershell
 robot --include smoke --outputdir Results Tests/
 ```

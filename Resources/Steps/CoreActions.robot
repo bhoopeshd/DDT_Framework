@@ -79,6 +79,47 @@ Input Text Safely
     Clear Element Text    ${locator}
     Input Text    ${locator}    ${text}
 
+Fluent Select From List
+    [Documentation]    Selects value from a standard <select> dropdown by label.
+    [Arguments]    ${locator}    ${label}    ${timeout}=${WAIT_TIME}    ${retry_interval}=${DELAY}
+    Wait Until Keyword Succeeds    ${timeout}    ${retry_interval}
+    ...    Select From List By Label Safely    ${locator}    ${label}
+    Log    Selected '${label}' from: ${locator}    level=INFO
+
+Select From List By Label Safely
+    [Documentation]    Helper for Fluent Select.
+    [Arguments]    ${locator}    ${label}
+    Wait Until Element Is Visible    ${locator}    timeout=2s
+    Wait Until Element Is Enabled    ${locator}    timeout=2s
+    Select From List By Label    ${locator}    ${label}
+
+Fluent Select Custom
+    [Documentation]    Selects value from a custom (div/ul) dropdown.
+    ...                1. Clicks the trigger (dropdown opener).
+    ...                2. Waits for option to be visible.
+    ...                3. Clicks the option.
+    [Arguments]    ${trigger_locator}    ${option_locator}    ${timeout}=${WAIT_TIME}    ${retry_interval}=${DELAY}
+    Wait Until Keyword Succeeds    ${timeout}    ${retry_interval}
+    ...    Select Custom Safely    ${trigger_locator}    ${option_locator}
+    Log    Custom Selected: ${option_locator}    level=INFO
+
+Select Custom Safely
+    [Documentation]    Helper for Custom Select.
+    [Arguments]    ${trigger_locator}    ${option_locator}
+    Click Element Safely    ${trigger_locator}
+    Wait Until Element Is Visible    ${option_locator}    timeout=2s
+    Click Element Safely    ${option_locator}
+
+Write Test Result
+    [Documentation]    Writes result to Excel (Common Teardown).
+    [Arguments]    ${test_name}    ${status}
+    ${test_id}=    Evaluate    "${test_name}".split()[0]
+    TRY
+        Write Result To Excel    ${test_id}    ${status}
+    EXCEPT    AS    ${error}
+        Log    Could not write to Excel: ${error}    level=WARN
+    END
+
 # =============================================================================
 # BROWSER KEYWORDS
 # =============================================================================

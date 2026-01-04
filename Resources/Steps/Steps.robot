@@ -7,3 +7,4 @@ Documentation     Keywords - Master Aggregator
 Resource          CoreActions.robot
 Resource          BusinessSteps.robot
 Resource          JSActions.robot
+Resource          DataUtils.robot
