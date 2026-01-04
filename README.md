@@ -1,296 +1,211 @@
-# Robot Framework Data-Driven Testing (DDT) Framework
+# 🚀 Smart BDD Data-Driven Automation Framework: The Enterprise Blueprint
 
-A **scalable, production-ready** automation framework built with Robot Framework, implementing clean separation of concerns through a 3-layer architecture.
+[![Robot Framework](https://img.shields.io/badge/Framework-Robot%20Framework-brightgreen.svg)](https://robotframework.org/)
+[![Selenium](https://img.shields.io/badge/Library-SeleniumLibrary-blue.svg)](https://robotframework.org/SeleniumLibrary/)
+[![Architecture](https://img.shields.io/badge/Architecture-Smart%20BDD-orange.svg)]()
 
----
-
-## 🏗️ Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        TEST LAYER                                │
-│                    (TestSuite.robot)                             │
-│         Data-driven tests using Test Template + DataDriver       │
-└───────────────────────────┬─────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   STEP DEFINITION LAYER                          │
-│               (Step_Definitions.robot)                           │
-│         High-level keywords consuming SeleniumLibrary            │
-└───────────────────────────┬─────────────────────────────────────┘
-                            │
-                            ▼
-┌───────────────────────────┴─────────────────────────────────────┐
-│                                                                   │
-│  ┌─────────────────────┐           ┌─────────────────────────┐   │
-│  │    UI MAP LAYER     │           │      DATA LAYER         │   │
-│  │   (Locators.py)     │           │   (TestData.xlsx)       │   │
-│  │  Python variables   │           │  Excel data source      │   │
-│  └─────────────────────┘           └─────────────────────────┘   │
-│                                                                   │
-└───────────────────────────────────────────────────────────────────┘
-```
+> **Role:** Senior Principal Automation Architect  
+> **Version:** 3.0.0 (Master Release)  
+> **Project:** Smart BDD Data-Driven Framework (SDDF)
 
 ---
 
-## 📁 Project Structure
+## 🏛️ 1. Framework Architecture & Vision
 
-```
-DDT_Framework/
-├── Data/
-│   └── TestData.xlsx              # Test data for DataDriver (Excel)
-│
-├── Resources/
-│   ├── Locators/
-│   │   └── Locators.py            # UI element locators (Python)
-│   │
-│   └── Keywords/
-│       └── Step_Definitions.robot  # High-level reusable keywords
-│
-├── Tests/
-│   └── TestSuite.robot            # Test suite with DataDriver config
-│
-├── Results/                       # Test execution outputs (auto-created)
-│
-├── requirements.txt               # Python dependencies
-└── README.md                      # This file
+The **Smart BDD Data-Driven Framework (SDDF)** is a high-fidelity automation solution designed for massive scale and extreme resilience. It avoids the pitfalls of traditional "Linear DDT" by implementing a **Decoupled Data-Seeking Architecture**.
+
+### 1.1 The "Data-Seeking" Pattern
+In standard DDT, data is pushed into tests. In SDDF, tests are "Smart":
+- **Tests** contain only behavioral intent steps and a unique `TestID`.
+- **Keywords** are "Data-Aware"; they use the `TestID` to pull exactly the parameters they need from Excel at runtime.
+- **Benefit**: Zero parameter-passing between layers, leading to the cleanest possible test scripts in the industry.
+
+### 1.2 Multi-Layered Design (SoC)
+```mermaid
+graph TD
+    subgraph "Intent Layer (BDD)"
+        A[TestSuite.robot] -->|TestID| B[Smart Keywords]
+    end
+    
+    subgraph "Logical Implementation Layer"
+        B -->|TestID| C[DataManager.robot]
+        B -->|Resilience| G[Fluent Wait Engine]
+        B -->|Advanced UI| H[JS Executor Layer]
+    end
+    
+    subgraph "Infrastructure & Config"
+        B -->|URL/Timeouts| E[Global_Config.robot]
+        B -->|CSS/XPath| F[Locators.robot]
+    end
+    
+    subgraph "Data & Persistence Layer"
+        C -->|CRUD| D[(TestData.xlsx)]
+    end
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🛠️ 2. Comprehensive Prerequisites & Installation
 
-### 1. Prerequisites
+### 2.1 Technical Prerequisites
+| Requirement | Specification |
+| :--- | :--- |
+| **Python** | 3.10+ (Recommended) |
+| **Browsers** | Microsoft Edge (Default), Google Chrome, or Firefox. |
+| **Drivers** | Framework uses `SeleniumLibrary` with automatic driver management support. |
 
-- **Python 3.8+** installed
-- **Chrome browser** (or modify for Firefox/Edge)
-- **Git** (optional, for version control)
+### 2.2 Step-by-Step Setup Guide
+Follow these steps to initialize the framework on a new machine:
 
-### 2. Installation
+1.  **Clone the Repository**:
+    ```powershell
+    git clone <your-repo-url>
+    cd DDT_Framework
+    ```
+2.  **Environment Isolation (Virtual Env)**:
+    ```powershell
+    python -m venv venv
+    .\venv\Scripts\Activate.ps1   # Windows
+    # source venv/bin/activate    # Linux/Mac
+    ```
+3.  **Core Installation**:
+    ```powershell
+    pip install -r requirements.txt
+    ```
 
+---
+
+## ⚙️ 3. Strategic Configuration (Global_Config.robot)
+
+The framework is "Configuration-First," allowing you to change environment and browser behavior without touching a single line of code.
+
+### 3.1 The 4-Stage Timing Model
+Flakiness is engineered out via a refined synchronization strategy:
+- **`${WAIT_TIME}`**: `10s` - The maximum threshold for an element to appear.
+- **`${DELAY}`**: `500ms` - The heartbeat used for **Fluent Wait** retries.
+- **`${IMPLICIT_WAIT}`**: `5s` - The primary DOM polling used by the browser.
+- **`${PAGE_LOAD_TIMEOUT}`**: `30s` - Blocks execution until `document.readyState` is 'complete'.
+
+### 3.2 Stealth & Noise Suppression
+Settings to ensure professional terminal output:
+- **`${BROWSER_LOG_LEVEL}`**: `3` (Error Only) - Mutes internal browser telemetry and "renderer" noise.
+- **`${HEADLESS}`**: Run in background for CI/CD.
+- **`${INCOGNITO}`**: Ensures every test starts with a 100% clean cache.
+
+---
+
+## 🏗️ 4. Master Keyword Encyclopedia
+
+The framework exposes a rich API of keywords categorized by their engineering purpose.
+
+### 4.1 "Smart" Interaction Keywords (Intent Layer)
+These keywords are used directly in tests and handle data loading automatically.
+- `Load Test Data ${TestID}`: Fetches Excel row data.
+- `Launch Application`: Opens browser with architect-level stealth settings.
+- `Update Execution Timestamp ${TestID}`: A Demonstration of writing back to Excel at runtime.
+
+### 4.2 Fluent Wait Resilience (Resilience Layer)
+Built to replace unreliable standard clicks/inputs.
+- `Fluent Wait For Element`: Polling-based visibility check.
+- `Fluent Click Element`: Only clicks when the element is both visible AND enabled.
+- `Fluent Input Text`: Clears, waits for focus, and inputs text with retry.
+
+### 4.3 JavaScript Executor API (Advanced Interaction)
+For modern web apps (React/Angular) where standard Selenium often fails.
+- `JS Click Element`: Direct DOM click.
+- `JS Clear And Input`: Programmatic value injection with event dispatch triggers.
+- `JS Scroll To Element`: Centers element in the viewport.
+- `JS Wait For Page Load`: Ensures the page is 100% interactable.
+
+### 4.4 Data Persistence & Results
+- `Write Result To Excel`: Records PASS/FAIL status in real-time.
+- `Write Data To Excel`: Write any runtime string to a specific column/row index.
+- `Console Log`: Custom terminal echoing for live run monitoring.
+
+---
+
+## 🚀 5. Comprehensive Execution Manual
+
+### 5.1 Standard Local Execution
 ```powershell
-# Clone or navigate to the framework directory
-cd DDT_Framework
-
-# Create virtual environment (recommended)
-python -m venv venv
-.\venv\Scripts\Activate.ps1   # Windows PowerShell
-# source venv/bin/activate    # Linux/Mac
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 3. Run Tests
-
-```powershell
-# Run all tests with default output directory
 robot --outputdir Results Tests/TestSuite.robot
-
-# Run with verbose logging
-robot --loglevel DEBUG --outputdir Results Tests/TestSuite.robot
-
-# Run specific test by name pattern
-robot --test "*Python*" --outputdir Results Tests/TestSuite.robot
 ```
 
----
-
-## 📊 Excel Data File Format
-
-The DataDriver library reads test data from `Data/TestData.xlsx`. The Excel file **must** follow this format:
-
-### Required Structure
-
-| test_name | url | search_term | expected_result |
-|-----------|-----|-------------|-----------------|
-| Google Search Python | https://www.google.com | Robot Framework Python | Robot Framework |
-| Google Search Java | https://www.google.com | Selenium Java Tutorial | Selenium |
-| Google Search Automation | https://www.google.com | Test Automation Best Practices | Automation |
-
-### Column Header Rules
-
-> ⚠️ **IMPORTANT**: Column headers must match keyword argument names!
-
-1. **Case-insensitive**: `URL`, `url`, `Url` all work
-2. **Underscores vs Spaces**: Use underscores in headers (`test_name` not `test name`)
-3. **First column**: Should be a unique test identifier (used in test name)
-4. **Order matters**: Columns should match the order of arguments in your template keyword
-
-### Template Keyword Signature
-
-```robot
-Execute Search Test Case
-    [Arguments]    ${url}    ${search_term}    ${expected_result}
-```
-
-The Excel columns map directly to these arguments:
-- Column B (`url`) → `${url}`
-- Column C (`search_term`) → `${search_term}`
-- Column D (`expected_result`) → `${expected_result}`
-
----
-
-## 🔧 Customization Guide
-
-### Adding New Locators
-
-Edit `Resources/Locators/Locators.py`:
-
-```python
-# Add new page locators
-MY_NEW_BUTTON = "id=new-button"
-MY_NEW_INPUT = "css=input.new-input"
-
-# Or use dynamic locator functions
-def get_menu_item(item_name):
-    return f"xpath=//nav//a[text()='{item_name}']"
-```
-
-### Adding New Keywords
-
-Edit `Resources/Keywords/Step_Definitions.robot`:
-
-```robot
-*** Keywords ***
-My New Keyword
-    [Documentation]    Description of what this keyword does
-    [Arguments]    ${arg1}    ${arg2}
-    [Tags]    custom
-    # Implementation here
-    Log    Executing with ${arg1} and ${arg2}
-```
-
-### Adding New Test Data
-
-1. Open `Data/TestData.xlsx`
-2. Add new rows with test data
-3. Each row becomes a new test case automatically
-
----
-
-## 📋 Test Execution Options
-
-### Basic Commands
-
+### 5.2 Enterprise CLI Overrides (The Senior Method)
+One of the most powerful features of the framework is the ability to override *any* property from the CLI.
 ```powershell
-# Standard execution
-robot --outputdir Results Tests/TestSuite.robot
+# Headless run in an Incognito Chrome session
+robot --variable BROWSER:chrome --variable HEADLESS:True --variable INCOGNITO:True Tests/
 
-# With specific browser
-robot --variable BROWSER:firefox --outputdir Results Tests/TestSuite.robot
+# Override URL for Staging environment
+robot --variable URL:https://staging.app.com Tests/
 
-# Skip specific tests
-robot --exclude skip --outputdir Results Tests/TestSuite.robot
-
-# Run with screenshots on pass
-robot --loglevel DEBUG --outputdir Results Tests/TestSuite.robot
+# Tuning timing for slow networks
+robot --variable WAIT_TIME:25s --variable DELAY:1s Tests/
 ```
 
-### Parallel Execution (with Pabot)
-
+### 5.3 Filtered Runs (Tagging)
+Useful for Smoke or Regression cycles:
 ```powershell
-# Install pabot
-pip install robotframework-pabot
-
-# Run tests in parallel
-pabot --processes 4 --outputdir Results Tests/TestSuite.robot
-```
-
-### CI/CD Integration (GitHub Actions Example)
-
-```yaml
-name: Robot Framework Tests
-
-on: [push, pull_request]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-          
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      - name: Run tests
-        run: robot --outputdir Results Tests/TestSuite.robot
-        
-      - name: Upload results
-        uses: actions/upload-artifact@v3
-        with:
-          name: robot-results
-          path: Results/
+robot --include smoke --outputdir Results Tests/
 ```
 
 ---
 
-## 📁 Test Results
+## 📊 6. Data Strategy (TestData.xlsx)
 
-After execution, the `Results/` directory contains:
+The Excel file is the source of truth for all test cases.
 
-| File | Description |
-|------|-------------|
-| `output.xml` | Raw test results in XML format |
-| `log.html` | Detailed execution log with screenshots |
-| `report.html` | Summary report with statistics |
-| `*.png` | Screenshots captured during test execution |
+### 6.1 Column Schema
+| Column | Name | Purpose |
+| :--- | :--- | :--- |
+| **A** | `TestID` | Unique key for the "Smart Keyword" lookup. |
+| **B-E** | `username`, `password`, etc. | Test parameters. |
+| **F** | `expected_title` | Used for UI assertions. |
+| **G** | `Result` (O) | Automatically populated by framework with PASS/FAIL. |
+| **H** | `Execution_Time` (O) | Automatically populated with a timestamp during the run. |
 
 ---
 
-## 🛠️ Troubleshooting
+## 📁 7. Standard Repository Structure
+
+Designed for high cohesion and low coupling.
+- **`Data/`**: Global Excel source and bi-directional result store.
+- **`Resources/Config/`**: Global environment and timing variables.
+- **`Resources/DataManager/`**: The core Excel CRUD engine.
+- **`Resources/Locators/`**: The centralized UI Map Layer.
+- **`Resources/Keywords/`**: The BDD logic and resilience pool.
+- **`Tests/`**: Behavioral test suites.
+- **`Results/`**: Traceable logs, statistics, and high-res evidence.
+
+---
+
+## 🛠️ 8. Extension Guide: Adding New Capability
+
+### How to Add a New Test Case
+1.  Add a new row in `TestData.xlsx` with a new `TestID` (e.g., `TC_06`).
+2.  Add a new test in `TestSuite.robot` calling `Load Test Data TC_06`.
+
+### How to Add a New UI Locator
+1.  Open `Resources/Locators/Locators.robot`.
+2.  Define your variable (e.g., `${NEW_BUTTON}  css=.btn-action`).
+
+### How to Add a New Keyword
+1.  Define it in `Resources/Keywords/Keywords.robot`.
+2.  Always use `Fluent` or `JS` variants for maximum stability.
+
+---
+
+## 🛡️ 9. Troubleshooting & CI/CD
 
 ### Common Issues
+- **Excel Locked**: Close `TestData.xlsx` before running; the framework needs write access.
+- **Driver Mismatch**: The framework will attempt to auto-resolve, but ensure your browser is up to date.
 
-| Issue | Solution |
-|-------|----------|
-| `WebDriverException` | Install/update ChromeDriver: `pip install webdriver-manager` |
-| `DataDriver file not found` | Check relative path in TestSuite.robot Settings |
-| `Variable not found` | Ensure Locators.py is imported correctly |
-| `Element not found` | Increase timeout or check locator validity |
-
-### Debug Mode
-
-```powershell
-# Run with maximum logging
-robot --loglevel TRACE --outputdir Results Tests/TestSuite.robot
-
-# Run single test interactively
-robot --test "Search Test: Google Search Python" --outputdir Results Tests/
-```
+### CI/CD Integration (GitHub Actions / Azure DevOps)
+SDDF is designed for headless servers. Simply use the `--variable HEADLESS:True` flag in your pipeline YAML.
 
 ---
 
-## 📚 Best Practices
-
-1. **Locator Strategy**: Prefer `id` > `name` > `css` > `xpath`
-2. **Keyword Naming**: Use descriptive, action-oriented names
-3. **Error Handling**: Use TRY/EXCEPT for graceful failures
-4. **Documentation**: Add `[Documentation]` to all keywords
-5. **Tagging**: Use `[Tags]` for test organization and filtering
-6. **Screenshots**: Capture on failure for debugging
-
----
-
-## 📄 License
-
-This framework is provided as-is for educational and professional use.
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Submit a pull request
-
----
-
-**Happy Testing! 🚀**
+**Architected by Antigravity AI** 🚀  
+*Engineered for Truth. Built for Scale.*
