@@ -1,0 +1,30 @@
+# =============================================================================
+# Robot Framework Data-Seeking DDT Framework
+# Python Dependencies
+# =============================================================================
+# 
+# Installation:
+#   pip install -r requirements.txt
+#
+# =============================================================================
+
+# Core Robot Framework
+robotframework>=6.0
+
+# Selenium Library for web automation
+robotframework-seleniumlibrary>=6.0
+
+# Excel Library for native Excel handling (Data Manager)
+robotframework-excellib>=2.0
+
+# Excel file handling
+openpyxl>=3.0
+
+# WebDriver Manager for automatic browser driver management
+webdriver-manager>=4.0
+
+# Optional: For parallel test execution
+# pabot>=2.0
+
+# Optional: For API testing capabilities
+# robotframework-requests>=0.9
