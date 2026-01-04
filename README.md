@@ -4,8 +4,6 @@
 [![Selenium](https://img.shields.io/badge/Library-SeleniumLibrary-blue.svg)](https://robotframework.org/SeleniumLibrary/)
 [![Architecture](https://img.shields.io/badge/Architecture-Smart%20BDD-orange.svg)]()
 
-> **Automation Architect:** Bhoopesh D
-
 ---
 
 ## 🏛️ 1. Framework Architecture & Vision
@@ -205,5 +203,5 @@ SDDF is designed for headless servers. Simply use the `--variable HEADLESS:True`
 
 ---
 
-**Architected by Antigravity AI** 🚀  
+**Architected by Bhoopesh D** 🚀  
 *Engineered for Truth. Built for Scale.*
