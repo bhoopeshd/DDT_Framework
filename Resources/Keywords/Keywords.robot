@@ -119,7 +119,7 @@ Update Execution Timestamp
     ...                Writes to column 8 (Execution_Time).
     [Arguments]    ${TestID}
     ${ts}=    Evaluate    __import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    Write Data To Excel    ${TestID}    8    ${ts}
+    Write Data To Excel    ${TestID}    Execution_Time    ${ts}
     Log    Updated runtime timestamp for ${TestID}: ${ts}    level=INFO
 
 

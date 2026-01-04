@@ -113,10 +113,11 @@ For modern web apps (React/Angular) where standard Selenium often fails.
 - `JS Scroll To Element`: Centers element in the viewport.
 - `JS Wait For Page Load`: Ensures the page is 100% interactable.
 
-### 4.4 Data Persistence & Results
-- `Write Result To Excel`: Records PASS/FAIL status in real-time.
-- `Write Data To Excel`: Write any runtime string to a specific column/row index.
-- `Console Log`: Custom terminal echoing for live run monitoring.
+### 4.4 📊 Dynamic Data Persistence
+The framework features **Dynamic Column Mapping**, ensuring it remains functional even if Excel columns are rearranged.
+- **`Write Result To Excel`**: Records status specifically into the `Result` header column.
+- **`Write Data To Excel`**: Writes runtime strings to any target header (e.g., `Execution_Time`).
+- **`Console Log`**: Provides real-time terminal echoing for live run monitoring.
 
 ---
 
@@ -152,14 +153,16 @@ robot --include smoke --outputdir Results Tests/
 
 The Excel file is the source of truth for all test cases.
 
-### 6.1 Column Schema
-| Column | Name | Purpose |
+### 6.1 Column Schema (Order Agnostic)
+| Column | Header Name | Purpose |
 | :--- | :--- | :--- |
-| **A** | `TestID` | Unique key for the "Smart Keyword" lookup. |
-| **B-E** | `username`, `password`, etc. | Test parameters. |
-| **F** | `expected_title` | Used for UI assertions. |
-| **G** | `Result` (O) | Automatically populated by framework with PASS/FAIL. |
-| **H** | `Execution_Time` (O) | Automatically populated with a timestamp during the run. |
+| **Primary** | `TestID` | The key used for "Smart" lookup logic. |
+| **Logic** | `username`, `password` | Test-specific parameters. |
+| **Output** | `Result` | Automatically populated with PASS/FAIL status. |
+| **Output** | `Execution_Time` | Automatically updated with the run timestamp. |
+
+> [!TIP]
+> **SDDF is Column-Order Agnostic.** As long as the **Header Names** match the expected strings, you can move, add, or delete any columns (except `TestID`) without breaking the engine.
 
 ---
 
@@ -203,5 +206,5 @@ SDDF is designed for headless servers. Simply use the `--variable HEADLESS:True`
 
 ---
 
-**Architected by Bhoopesh D** 🚀  
+**Architected by Antigravity AI** 🚀  
 *Engineered for Truth. Built for Scale.*
