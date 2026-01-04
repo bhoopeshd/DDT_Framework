@@ -20,18 +20,18 @@ In standard DDT, data is pushed into tests. In SDDF, tests are "Smart":
 ```mermaid
 graph TD
     subgraph "Intent Layer (BDD)"
-        A[TestSuite.robot] -->|TestID| B[Smart Keywords]
+        A[TestSuite.robot] -->|TestID| B[StepDefinitions.robot]
     end
     
     subgraph "Logical Implementation Layer"
         B -->|TestID| C[DataManager.robot]
-        B -->|Resilience| G[Fluent Wait Engine]
-        B -->|Advanced UI| H[JS Executor Layer]
+        B -->|Resilience| G[CoreActions.robot]
+        B -->|Advanced UI| H[JSActions.robot]
     end
     
     subgraph "Infrastructure & Config"
         B -->|URL/Timeouts| E[Global_Config.robot]
-        B -->|CSS/XPath| F[Locators.robot]
+        B -->|CSS/XPath| F[UIMap.robot]
     end
     
     subgraph "Data & Persistence Layer"
@@ -124,6 +124,8 @@ The framework features **Dynamic Column Mapping**, ensuring it remains functiona
 ## 🚀 5. Comprehensive Execution Manual
 
 ### 5.1 Standard Local Execution
+To run all test cases in the suite:
+
 ```powershell
 robot --outputdir Results Tests/TestSuite.robot
 ```
@@ -172,8 +174,8 @@ Designed for high cohesion and low coupling.
 - **`Data/`**: Global Excel source and bi-directional result store.
 - **`Resources/Config/`**: Global environment and timing variables.
 - **`Resources/DataManager/`**: The core Excel CRUD engine.
-- **`Resources/Locators/`**: The centralized UI Map Layer.
-- **`Resources/Keywords/`**: The BDD logic and resilience pool.
+- **`Resources/UIMap/`**: The centralized Page Object Model (POM) Layer.
+- **`Resources/Steps/`**: The BDD Step Definition and Action Layer.
 - **`Tests/`**: Behavioral test suites.
 - **`Results/`**: Traceable logs, statistics, and high-res evidence.
 
@@ -186,11 +188,11 @@ Designed for high cohesion and low coupling.
 2.  Add a new test in `TestSuite.robot` calling `Load Test Data TC_06`.
 
 ### How to Add a New UI Locator
-1.  Open `Resources/Locators/Locators.robot`.
+1.  Open `Resources/UIMap/LoginPage.robot` (or create a new page file).
 2.  Define your variable (e.g., `${NEW_BUTTON}  css=.btn-action`).
 
-### How to Add a New Keyword
-1.  Define it in `Resources/Keywords/Keywords.robot`.
+### How to Add a New Step
+1.  Define it in `Resources/Steps/BusinessSteps.robot` (or `CoreActions.robot`).
 2.  Always use `Fluent` or `JS` variants for maximum stability.
 
 ---

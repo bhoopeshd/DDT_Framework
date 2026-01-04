@@ -3,7 +3,7 @@ Documentation     Login Test Suite - BDD Style
 ...               ================================
 ...               Readable test steps with smart data handling.
 
-Resource          ../Resources/Keywords/Step_Definitions.robot
+Resource          ../Resources/Steps/Steps.robot
 
 Suite Setup       Clear Results Folder
 Suite Teardown    Close Browser Safely
