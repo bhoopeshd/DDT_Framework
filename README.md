@@ -4,9 +4,7 @@
 [![Selenium](https://img.shields.io/badge/Library-SeleniumLibrary-blue.svg)](https://robotframework.org/SeleniumLibrary/)
 [![Architecture](https://img.shields.io/badge/Architecture-Smart%20BDD-orange.svg)]()
 
-> **Role:** Senior Principal Automation Architect  
-> **Version:** 3.0.0 (Master Release)  
-> **Project:** Smart BDD Data-Driven Framework (SDDF)
+> **Automation Architect:** Bhoopesh D
 
 ---
 
