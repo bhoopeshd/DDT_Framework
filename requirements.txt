@@ -1,5 +1,5 @@
 # =============================================================================
-# Robot Framework Data-Seeking DDT Framework
+# Smart BDD Data-Driven Framework (SDDF) Framework
 # Python Dependencies
 # =============================================================================
 # 
@@ -22,9 +22,3 @@ openpyxl>=3.0
 
 # WebDriver Manager for automatic browser driver management
 webdriver-manager>=4.0
-
-# Optional: For parallel test execution
-# pabot>=2.0
-
-# Optional: For API testing capabilities
-# robotframework-requests>=0.9

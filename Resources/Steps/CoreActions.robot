@@ -102,12 +102,12 @@ Log Test Step
     Log    ════════════════════════════════════════    level=INFO
     Log    STEP ${step}: ${description}    level=INFO
     Log    ════════════════════════════════════════    level=INFO
-    Log To Console    \n📍 STEP ${step}: ${description}
+    Log To Console    \nSTEP ${step}: ${description}
 
 Console Log
     [Documentation]    Logs a message directly to the terminal.
     [Arguments]    ${message}
-    Log To Console    \n📢 ${message}
+    Log To Console    \n${message}
 
 # =============================================================================
 # SCREENSHOT KEYWORDS
@@ -115,6 +115,6 @@ Console Log
 
 Take Screenshot
     [Documentation]    Takes screenshot with prefix.
-    [Arguments]    ${prefix}=screenshot
+    [Arguments]    ${name}=screenshot
     ${ts}=    Evaluate    __import__('datetime').datetime.now().strftime('%Y%m%d_%H%M%S')
-    Capture Page Screenshot    ${prefix}_${ts}.png
+    Capture Page Screenshot    ${name}_${ts}.png

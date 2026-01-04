@@ -25,7 +25,7 @@ Load Test Data
 Launch Application
     [Documentation]    Opens browser and navigates to application URL.
     ...                Consolidates browser options for headless and incognito.
-    Log To Console    \n🚀 Launching application (${BROWSER})...
+    Log To Console    \nLaunching application (${BROWSER})...
     
     ${options}=    Set Variable    add_argument("--log-level=${BROWSER_LOG_LEVEL}"); add_argument("--disable-logging"); add_argument("--silent")
     
@@ -48,27 +48,27 @@ Launch Application
     Set Selenium Timeout    ${WAIT_TIME}
     Set Selenium Implicit Wait    ${IMPLICIT_WAIT}
     Fluent Wait For Element    ${LOGIN_USERNAME_INPUT}
-    Log To Console    ✅ Browser launched successfully.
+    Log To Console    Browser launched successfully.
 
 Enter User Credentials
     [Documentation]    Enters username and password from loaded test data.
-    Log To Console    👤 Entering credentials for: ${TEST_DATA}[username]
+    Log To Console    Entering credentials for: ${TEST_DATA}[username]
     Fluent Wait For Element    ${LOGIN_USERNAME_INPUT}
     JS Clear And Input    ${LOGIN_USERNAME_INPUT}    ${TEST_DATA}[username]
     JS Clear And Input    ${LOGIN_PASSWORD_INPUT}    ${TEST_DATA}[password]
 
 Click Login Button
     [Documentation]    Clicks the login submit button.
-    Log To Console    🖱️ Clicking login button...
+    Log To Console    Clicking login button...
     Fluent Click Element    ${LOGIN_SUBMIT_BUTTON}
     Sleep    ${DELAY}
 
 Validate Login Success
     [Documentation]    Validates successful login.
-    Log To Console    🏆 Validating login success...
+    Log To Console    Validating login success...
     Fluent Wait For Element    ${SECURE_AREA_HEADER}
     Page Should Contain    Secure Area
-    Log To Console    ✅ Login validated!
+    Log To Console    Login validated!
 
 Validate Login Error Message
     [Documentation]    Validates login error message from test data.

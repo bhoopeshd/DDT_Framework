@@ -56,7 +56,7 @@ Follow these steps to initialize the framework on a new machine:
 1.  **Clone the Repository**:
     ```powershell
     git clone <your-repo-url>
-    cd DDT_Framework
+    cd SDDF_Framework
     ```
 2.  **Environment Isolation (Virtual Env)**:
     ```powershell
@@ -95,29 +95,41 @@ Settings to ensure professional terminal output:
 The framework exposes a rich API of keywords categorized by their engineering purpose.
 
 ### 4.1 "Smart" Interaction Keywords (Intent Layer)
-These keywords are used directly in tests and handle data loading automatically.
-- `Load Test Data ${TestID}`: Fetches Excel row data.
+- `Load Test Data ${TestID}`: Fetches Excel row data into the `${TEST_DATA}` dictionary.
 - `Launch Application`: Opens browser with architect-level stealth settings.
-- `Update Execution Timestamp ${TestID}`: A Demonstration of writing back to Excel at runtime.
+- `Update Execution Timestamp ${TestID}`: Writes back to Excel.
 
 ### 4.2 Fluent Wait Resilience (Resilience Layer)
-Built to replace unreliable standard clicks/inputs.
 - `Fluent Wait For Element`: Polling-based visibility check.
-- `Fluent Click Element`: Only clicks when the element is both visible AND enabled.
-- `Fluent Input Text`: Clears, waits for focus, and inputs text with retry.
+- `Fluent Click Element`: Clicks only when visible + enabled.
+- `Fluent Input Text`: Clears -> Waits -> Inputs.
 
-### 4.3 JavaScript Executor API (Advanced Interaction)
-For modern web apps (React/Angular) where standard Selenium often fails.
-- `JS Click Element`: Direct DOM click.
-- `JS Clear And Input`: Programmatic value injection with event dispatch triggers.
-- `JS Scroll To Element`: Centers element in the viewport.
-- `JS Wait For Page Load`: Ensures the page is 100% interactable.
+### 4.3 JavaScript Executor API (The "Magic" Layer)
+Use these when standard Selenium interactions fail (e.g., hidden elements, overlays, React/Angular apps).
+- **Interaction**: `JS Click Element`, `JS Clear And Input`, `JS Input Text`.
+- **State**: `JS Get Text`, `JS Get Value`, `JS Is Element Visible`.
+- **Navigation**: `JS Scroll To Element`, `JS Scroll To Top/Bottom`, `JS Scroll By`.
+- **Debugging**: `JS Highlight Element` (draws red border), `JS Set Attribute`, `JS Remove Attribute`.
+- **Waits**: `JS Wait For Page Load` (document.readyState), `JS Wait For Ajax` (jQuery.active).
 
-### 4.4 📊 Dynamic Data Persistence
-The framework features **Dynamic Column Mapping**, ensuring it remains functional even if Excel columns are rearranged.
-- **`Write Result To Excel`**: Records status specifically into the `Result` header column.
-- **`Write Data To Excel`**: Writes runtime strings to any target header (e.g., `Execution_Time`).
-- **`Console Log`**: Provides real-time terminal echoing for live run monitoring.
+### 4.4 📊 Dynamic Data Persistence & Strategy
+The framework uses a **Dictionary-based** approach for data.
+
+#### Reading Data
+Once `Load Test Data` is called, data is available in the `${TEST_DATA}` dictionary.
+```robot
+Log    Username is: ${TEST_DATA}[username]
+Input Text    ${LOGIN_INPUT}    ${TEST_DATA}[password]
+```
+
+#### Writing Data
+You can write to *any* column by name using `Write Data To Excel`.
+- **`Write Result To Excel`**: Updates `Result` column (PASS/FAIL).
+- **`Write Data To Excel`**: Updates any column (e.g., `Execution_Time`).
+```robot
+# usage: Write Data To Excel  TestID  ColumnName  Value
+Write Data To Excel    TC_01    Execution_Time    2024-01-01 12:00:00
+```
 
 ---
 
