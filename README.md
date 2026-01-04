@@ -1,4 +1,4 @@
-# 🚀 Smart BDD Data-Driven Automation Framework: The Enterprise Blueprint
+# 🚀 DDT - Data Driven Automation Framework: The Enterprise Blueprint
 
 [![Robot Framework](https://img.shields.io/badge/Framework-Robot%20Framework-brightgreen.svg)](https://robotframework.org/)
 [![Selenium](https://img.shields.io/badge/Library-SeleniumLibrary-blue.svg)](https://robotframework.org/SeleniumLibrary/)
@@ -208,5 +208,5 @@ SDDF is designed for headless servers. Simply use the `--variable HEADLESS:True`
 
 ---
 
-**Architected by Antigravity AI** 🚀  
+**Architected by Bhoopesh D** 🚀  
 *Engineered for Truth. Built for Scale.*
